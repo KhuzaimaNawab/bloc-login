@@ -1,4 +1,5 @@
 import 'package:bloc_login/view/screen/register_screen.dart';
+import 'package:bloc_login/view/screen/verify_otp_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -108,7 +109,11 @@ class LoginPhone extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: CustomButton(
-                    onpress: () {},
+                    onpress: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const VerifyOTP(),
+                      ));
+                    },
                     btnName: 'Login',
                     btnColor: color,
                     height: 40,

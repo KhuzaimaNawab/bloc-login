@@ -6,8 +6,8 @@ class CustomButton extends StatelessWidget {
     required this.onpress,
     required this.btnName,
     required this.btnColor,
-    required this.height,
-    required this.width,
+    this.height = 0,
+    this.width= 0,
   });
 
   final void Function()? onpress;
