@@ -108,19 +108,53 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: CustomButton(
-                onpress: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => const LoginGoogle()),
-                  );
-                },
-                btnName: 'Login with Google',
-                btnColor: color,
-                height: 40,
-                width: size.width,
+            Row(
+              children: const [
+                Expanded(
+                  child: Divider(
+                    color: Colors.grey,
+                    height: 36,
+                  ),
+                ),
+                Text(
+                  '  Or Login with  ',
+                  style: TextStyle(color: Colors.grey),
+                ),
+                Expanded(
+                  child: Divider(
+                    color: Colors.grey,
+                    height: 36,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            InkWell(
+              onTap: () {},
+              child: SizedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 40,
+                      height: 40,
+                      child: Image.network(
+                          'https://i.stack.imgur.com/aZqAl.png',
+                          fit: BoxFit.cover),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    const Text(
+                      'Google',
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
