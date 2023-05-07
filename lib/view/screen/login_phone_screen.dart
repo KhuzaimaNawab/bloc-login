@@ -1,4 +1,3 @@
-import 'package:bloc_login/view/screen/login_google_screen.dart';
 import 'package:bloc_login/view/screen/register_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
