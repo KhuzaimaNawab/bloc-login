@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "715079851680",
+    "project_id": "bloc-login-88187",
+    "storage_bucket": "bloc-login-88187.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715079851680:android:f9caf2ce4a8c4266ca73c5",
+        "android_client_info": {
+          "package_name": "com.example.bloc_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715079851680-pcfhqrj3e14j1kp0kfjk97n3dtllk41k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bloc_login",
+            "certificate_hash": "f93c1df11805dba00b28d4cccba76dd9b94c9dac"
+          }
+        },
+        {
+          "client_id": "715079851680-6trc63kqo0209abmobe3fgrh3vjs7pqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhpx_ewvrzgoqVUaNU6iNLLljhfEwFbnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "715079851680-6trc63kqo0209abmobe3fgrh3vjs7pqp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
