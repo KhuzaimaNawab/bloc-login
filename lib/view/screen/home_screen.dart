@@ -1,7 +1,9 @@
+import 'package:bloc_login/blocs/auth_gmail/auth_gmail_bloc.dart';
 import 'package:bloc_login/view/screen/login_email_screen.dart';
 import 'package:bloc_login/view/screen/login_phone_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/custom_button.dart';
 
@@ -78,7 +80,7 @@ class HomePage extends StatelessWidget {
               child: CustomButton(
                 onpress: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const LoginEmail()),
+                    MaterialPageRoute(builder: (context) => LoginEmail()),
                   );
                 },
                 btnName: 'Login with Email/Password',
@@ -95,7 +97,7 @@ class HomePage extends StatelessWidget {
               child: CustomButton(
                 onpress: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const LoginPhone()),
+                    MaterialPageRoute(builder: (context) => LoginPhone()),
                   );
                 },
                 btnName: 'Login with Phone Number',
@@ -131,7 +133,10 @@ class HomePage extends StatelessWidget {
               height: 20,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                final signIn =
+                    BlocProvider.of<AuthGmailBloc>(context).signInWithGoogle();
+              },
               child: SizedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

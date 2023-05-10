@@ -1,3 +1,5 @@
+import 'package:bloc_login/blocs/auth_email/auth_email_bloc.dart';
+import 'package:bloc_login/view/screen/logged_in_screen.dart';
 import 'package:bloc_login/view/screen/register_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +9,10 @@ import '../../blocs/internet/internet_bloc.dart';
 import '../widgets/custom_button.dart';
 
 class LoginEmail extends StatelessWidget {
-  const LoginEmail({super.key});
+  LoginEmail({super.key});
   final Color color = const Color.fromARGB(255, 242, 120, 107);
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +104,7 @@ class LoginEmail extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
+                    controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       hintText: "Enter Email",
@@ -118,6 +123,7 @@ class LoginEmail extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
+                    controller: _passwordController,
                     keyboardType: TextInputType.name,
                     obscureText: true,
                     decoration: InputDecoration(
@@ -151,12 +157,32 @@ class LoginEmail extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: CustomButton(
-                      onpress: () {},
-                      btnName: 'Login',
-                      btnColor: color,
-                      height: 40,
-                      width: size.width),
+                  child: BlocBuilder<AuthEmailBloc, AuthEmailState>(
+                    builder: (context, state) {
+                      if (state is AuthLoadingState) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      return CustomButton(
+                          onpress: () {
+                            
+                            final signIn =
+                                BlocProvider.of<AuthEmailBloc>(context)
+                                    .signInWithEmailPassword(
+                                        _emailController.text,
+                                        _passwordController.text);
+
+                            if (signIn != null) {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: ((context) =>
+                                      const LoggedInScreen())));
+                            }
+                          },
+                          btnName: 'Login',
+                          btnColor: color,
+                          height: 40,
+                          width: size.width);
+                    },
+                  ),
                 ),
                 const SizedBox(
                   height: 20,

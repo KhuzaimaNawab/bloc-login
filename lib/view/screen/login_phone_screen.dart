@@ -1,3 +1,4 @@
+import 'package:bloc_login/blocs/auth_phone/auth_phone_bloc.dart';
 import 'package:bloc_login/blocs/internet/internet_bloc.dart';
 import 'package:bloc_login/view/screen/register_screen.dart';
 import 'package:bloc_login/view/screen/verify_otp_screen.dart';
@@ -8,8 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/custom_button.dart';
 
 class LoginPhone extends StatelessWidget {
-  const LoginPhone({super.key});
+  LoginPhone({super.key});
   final Color color = const Color.fromARGB(255, 242, 120, 107);
+
+  final TextEditingController _phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +104,7 @@ class LoginPhone extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
+                    controller: _phoneController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       hintText: "Enter Number",
@@ -133,16 +137,22 @@ class LoginPhone extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: CustomButton(
-                      onpress: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const VerifyOTP(),
-                        ));
-                      },
-                      btnName: 'Login',
-                      btnColor: color,
-                      height: 40,
-                      width: size.width),
+                  child: BlocBuilder<AuthPhoneBloc, AuthPhoneState>(
+                    builder: (context, state) {
+                      return CustomButton(
+                          onpress: () {
+                            final a = _phoneController.text;
+                            final phoneNumber = "+92$a";
+                            print(phoneNumber);
+                            BlocProvider.of<AuthPhoneBloc>(context)
+                                .sendOtp(phoneNumber);
+                          },
+                          btnName: 'Login',
+                          btnColor: color,
+                          height: 40,
+                          width: size.width);
+                    },
+                  ),
                 ),
                 const SizedBox(
                   height: 20,

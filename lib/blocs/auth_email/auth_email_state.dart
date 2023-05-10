@@ -5,8 +5,16 @@ abstract class AuthEmailState {}
 
 class AuthEmailInitial extends AuthEmailState {}
 
-class AuthLoadingState extends AuthEmailState{}
+class AuthLoggedInState extends AuthEmailState {
+  final User user;
 
-class AuthSuccessState extends AuthEmailState{}
+  AuthLoggedInState({required this.user});
+}
 
-class AuthFailureState extends AuthEmailState{}
+class AuthLoggedOutState extends AuthEmailState{}
+
+class AuthLoadingState extends AuthEmailState {}
+
+class AuthSuccessState extends AuthEmailState {}
+
+class AuthFailureState extends AuthEmailState {}

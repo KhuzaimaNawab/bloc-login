@@ -4,10 +4,11 @@ import 'package:flutter/services.dart';
 class BuildOTPBox extends StatelessWidget {
   const BuildOTPBox({
     super.key,
-    required this.color,
+    required this.color, required this.controller,
   });
 
   final Color color;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class BuildOTPBox extends StatelessWidget {
       ),
       child: Center(
         child: TextField(
+          controller: controller,
           onChanged: (val) {
             if (val.length == 1) {
               FocusScope.of(context).nextFocus();

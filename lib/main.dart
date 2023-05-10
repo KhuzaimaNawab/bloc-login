@@ -1,3 +1,6 @@
+import 'package:bloc_login/blocs/auth_email/auth_email_bloc.dart';
+import 'package:bloc_login/blocs/auth_gmail/auth_gmail_bloc.dart';
+import 'package:bloc_login/blocs/auth_phone/auth_phone_bloc.dart';
 import 'package:bloc_login/blocs/internet/internet_bloc.dart';
 import 'package:bloc_login/view/screen/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,6 +22,15 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<InternetBloc>(
           create: (_) => InternetBloc(),
+        ),
+        BlocProvider<AuthEmailBloc>(
+          create: (_) => AuthEmailBloc(),
+        ),
+        BlocProvider<AuthGmailBloc>(
+          create: (_) => AuthGmailBloc(),
+        ),
+        BlocProvider<AuthPhoneBloc>(
+          create: (_) => AuthPhoneBloc(),
         ),
       ],
       child: const MaterialApp(

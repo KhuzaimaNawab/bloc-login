@@ -1,14 +1,19 @@
+import 'package:bloc_login/blocs/auth_phone/auth_phone_bloc.dart';
 import 'package:bloc_login/view/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 import '../../blocs/internet/internet_bloc.dart';
 import '../widgets/build_OTP_box.dart';
 
 class VerifyOTP extends StatelessWidget {
-  const VerifyOTP({super.key});
+  VerifyOTP({super.key});
   final Color color = const Color.fromARGB(255, 242, 120, 107);
+
+  final TextEditingController _otpController1 = TextEditingController();
+  final TextEditingController _otpController2 = TextEditingController();
+  final TextEditingController _otpController3 = TextEditingController();
+  final TextEditingController _otpController4 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,20 +67,26 @@ class VerifyOTP extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Row(
-                  children: const [
-                    Text(
-                      '+91 9876543210',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      'Change phone Number?',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ],
+                BlocBuilder<InternetBloc, InternetState>(
+                  builder: (context, state) {
+                    final phoneNo = BlocProvider.of<AuthPhoneBloc>(context)
+                        .getPhoneNumber();
+                    return Row(
+                      children: [
+                        Text(
+                          phoneNo,
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        const Text(
+                          'Change phone Number?',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 30,
@@ -86,10 +97,22 @@ class VerifyOTP extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        BuildOTPBox(color: color),
-                        BuildOTPBox(color: color),
-                        BuildOTPBox(color: color),
-                        BuildOTPBox(color: color),
+                        BuildOTPBox(
+                          color: color,
+                          controller: _otpController1,
+                        ),
+                        BuildOTPBox(
+                          color: color,
+                          controller: _otpController2,
+                        ),
+                        BuildOTPBox(
+                          color: color,
+                          controller: _otpController3,
+                        ),
+                        BuildOTPBox(
+                          color: color,
+                          controller: _otpController4,
+                        ),
                       ],
                     ),
                   ),
@@ -110,12 +133,23 @@ class VerifyOTP extends StatelessWidget {
                       width: 10,
                     ),
                     Expanded(
-                      child: CustomButton(
-                        height: 20,
-                        width: 100,
-                        onpress: () {},
-                        btnName: 'Confirm',
-                        btnColor: color,
+                      child: BlocBuilder<AuthPhoneBloc, AuthPhoneState>(
+                        builder: (context, state) {
+                          return CustomButton(
+                            height: 20,
+                            width: 100,
+                            onpress: () {
+                              final otpCode = _otpController1.text +
+                                  _otpController2.text +
+                                  _otpController3.text +
+                                  _otpController4.text;
+                              BlocProvider.of<AuthPhoneBloc>(context)
+                                  .verifyOTP(otpCode);
+                            },
+                            btnName: 'Confirm',
+                            btnColor: color,
+                          );
+                        },
                       ),
                     ),
                   ],
